@@ -1,0 +1,48 @@
+DROP TABLE IF EXISTS Dierenartsen;
+DROP TABLE IF EXISTS Klanten;
+DROP TABLE IF EXISTS Dieren;
+DROP TABLE IF EXISTS Afspraken;
+
+CREATE TABLE Dierenartsen (
+	Id INT NOT NULL IDENTITY,
+	Voornaam NVARCHAR(50) NOT NULL,
+	Achternaam NVARCHAR(50) NOT NULL,
+	Telefoonnummer INT NOT NULL,
+	Specialisatie NVARCHAR(50) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+CREATE TABLE Klanten (
+	Id INT NOT NULL IDENTITY,
+	Voornaam NVARCHAR(50) NOT NULL,
+	Achternaam NVARCHAR(50) NOT NULL,
+	Telefoonnummer INT NOT NULL,
+	Adress NVARCHAR(100),
+	PRIMARY KEY (id),
+);
+
+CREATE TABLE Dieren (
+	Id INT NOT NULL IDENTITY,
+	Naam NVARCHAR(50) NOT NULL,
+	Soort NVARCHAR(50) NOT NULL,
+	Ras NVARCHAR(50),
+	Kleur NVARCHAR(50),
+	Geboortedatum DATE NOT NULL,
+	Gezondheidsstatus NVARCHAR(100),
+	BaasjeId INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (BaasjeId) REFERENCES Klanten(Id)
+);
+
+CREATE TABLE Afspraken (
+	Id INT NOT NULL IDENTITY ,
+	DatumTijdstip DATETIME NOT NULL,
+	ArtsId INT NOT NULL,
+	KlantId INT NOT NULL,
+	DierId INT NOT NULL,
+	RedenConsult NVARCHAR(50) NOT NULL,
+	PRIMARY KEY (DatumTijdstip, ArtsId),
+	FOREIGN KEY (ArtsId) REFERENCES Dierenartsen(Id),
+	FOREIGN KEY (KlantId) REFERENCES Klanten(Id),
+	FOREIGN KEY (DierId) REFERENCES Dieren(Id)
+); 
