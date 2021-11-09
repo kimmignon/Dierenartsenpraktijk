@@ -32,11 +32,15 @@ namespace Dierenartsenpraktijk.Data
 
             return entity;
         }
-
+        //protected functies horende bij save (moeten apart worden geimplementeerd
         protected abstract TEntity Insert(TEntity entiteit);
         protected abstract void Update(TEntity entiteit);
 
+        //Andere functie voor beheren van database
         public abstract void Delete(TEntity entiteit);
+        public abstract List<TEntity> GeefAlle();
+        public abstract List<TEntity> GeefOpNaam(string naamIngave);
+        public abstract TEntity GeefOpId(int idIngave);
 
 
         public void Dispose()

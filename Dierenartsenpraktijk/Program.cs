@@ -19,12 +19,7 @@ namespace Dierenartsenpraktijk
             SpecialisatieType type = SpecialisatieType.KattenEnHonden;
             Dierenarts dierenarts = new Dierenarts("Frida", "Goossens", 0123456789, type);
             DierenartsRepository dierenartsRepository = new DierenartsRepository();
-            dierenarts.Voornaam = "Flor";
             dierenartsRepository.Opslaan(dierenarts);
-            dierenarts.Voornaam = "Fidi";
-            dierenartsRepository.Opslaan(dierenarts);
-            dierenarts.Id = 3;
-            dierenartsRepository.Delete(dierenarts);
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
         }
