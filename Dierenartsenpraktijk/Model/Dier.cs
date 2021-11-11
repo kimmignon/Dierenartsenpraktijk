@@ -12,11 +12,11 @@ namespace Dierenartsenpraktijk.Model
         public string Soort {  get; set;}
         public string? Ras {  get; set; }
         public string Kleur {  get; set; }
-        public DateOnly Geboortedatum { get; set; }
+        public DateTime Geboortedatum { get; set; }
         public string? Gezondheidsstatus { get; set; }
         public Klant Baasje {  get; set; }
 
-        public Dier(string naam, string soort, string kleur, DateOnly datum, Klant baasje)
+        public Dier(string naam, string soort, string kleur, DateTime datum, Klant baasje)
         {
             this.Naam = naam;
             this.Soort = soort;

@@ -15,7 +15,7 @@ namespace Dierenartsenpraktijk.Data
             using var command = _connection.CreateCommand();
 
             command.CommandText = "INSERT INTO [Dieren] (Naam, Soort, Ras, Kleur, Geboortedatum, Gezondheidsstatus, BaasjeId) " +
-                "VALUES (@Naam, @Soort, @Ras, @Kleur, @Geboortedatum, @Gezondheidsstatus, (select Id from Klanten where Id = @BaasjeId)); SELECT SCOPE_IDENTITY()";
+                "VALUES (@Naam, @Soort, @Ras, @Kleur, @Geboortedatum, @Gezondheidsstatus, @BaasjeId); SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@Naam", dier.Naam);
             command.Parameters.AddWithValue("@Soort", dier.Soort);
             command.Parameters.AddWithValue("@Kleur", dier.Kleur);
@@ -50,16 +50,19 @@ namespace Dierenartsenpraktijk.Data
         public override void Delete(Dier dier)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "DELETE FROM [Dierenartsen] WHERE [Id] = @Id";
+            command.CommandText = "DELETE FROM [Dieren] WHERE [Id] = @Id";
             command.Parameters.AddWithValue("Id", dier.Id);
             command.ExecuteNonQuery();
         }
+
+
         //Functie voor alle Dieren op te halen en in lijst te steken
         public override List<Dier> GeefAlle()
         {
             List<Dier> resultSet = new List<Dier>();
+            KlantRepository klantRepository = new KlantRepository();
             using var command = _connection.CreateCommand();
-            command.CommandText = "SELECT Id, Naam, Soort, Ras, Kleur, Geboortedatum, Gezondheidsstatus, BaasjeId FROM Dieren;";
+            command.CommandText = "SELECT Id, Naam, Soort, Ras, Kleur, Geboortedatum, Gezondheidsstatus, BaasjeId FROM [Dieren]";
             using var reader = command.ExecuteReader();
             reader.Read();
             while (reader.Read())
@@ -67,15 +70,91 @@ namespace Dierenartsenpraktijk.Data
                 int id = reader.GetInt32(0);
                 string naam = (string)reader.GetString(1);
                 string soort = (string)reader.GetString(2);
+                string? ras = (string)reader.GetString(3);
+                string kleur = (string)reader.GetString(4);
+                DateTime geboortedatum = (DateTime)reader.GetDateTime(5);
+                string? gezondheidsstatus = (string)reader.GetString(6);
+                int baasjeId = (int)reader.GetInt32(7);
+                Klant baasje = klantRepository.GeefOpId(baasjeId);
 
-                int telefoonnummer = (int)reader.GetInt32(3);
-                SpecialisatieType type = mapSpecialisatieType((string)reader.GetString(4));
-                Dierenarts dierenarts = new Dierenarts(voornaam, achternaam, telefoonnummer, type);
-                dierenarts.Id = id;
-                resultSet.Add(dierenarts);
+                Dier dier = new Dier(naam, soort, kleur, geboortedatum, baasje);
+                dier.Id = id;
+                dier.Ras = ras;
+                dier.Gezondheidsstatus = gezondheidsstatus;
+                resultSet.Add(dier);
             }
             reader.Close();
             return resultSet;
+        }
+
+        //Functie voor alle Dieren op naam op te halen (functie geeft lijst met dieren die letters bevatten)
+        public override List<Dier> GeefOpNaam(string naamIngave)
+        {
+            List<Dier> resultSet = new List<Dier>();
+            KlantRepository klantRepository = new KlantRepository();
+            using var command = _connection.CreateCommand();
+            command.CommandText = "SELECT Id, Naam, Soort, Ras, Kleur, Geboortedatum, Gezondheidsstatus, BaasjeId FROM [Dieren]";
+            using var reader = command.ExecuteReader();
+            reader.Read();
+            while (reader.Read())
+            {
+                string naam = (string)reader.GetString(1);
+                if (naam.Contains(naamIngave))
+                {
+                    int id = reader.GetInt32(0);
+                    string soort = (string)reader.GetString(2);
+                    string? ras = (string)reader.GetString(3);
+                    string kleur = (string)reader.GetString(4);
+                    DateTime geboortedatum = (DateTime)reader.GetDateTime(5);
+                    string? gezondheidsstatus = (string)reader.GetString(6);
+                    int baasjeId = (int)reader.GetInt32(7);
+                    Klant baasje = klantRepository.GeefOpId(baasjeId);
+
+                    Dier dier = new Dier(naam, soort, kleur, geboortedatum, baasje);
+                    dier.Id = id;
+                    dier.Ras = ras;
+                    dier.Gezondheidsstatus = gezondheidsstatus;
+                    resultSet.Add(dier);
+                }
+                
+            }
+            reader.Close();
+            return resultSet;
+        }
+
+        //Functie om 1 dier op Id te selecteren
+        public override Dier? GeefOpId(int idIngave)
+        {
+            KlantRepository klantRepository = new KlantRepository();
+            using var command = _connection.CreateCommand();
+            command.CommandText = "SELECT Id, Naam, Soort, Ras, Kleur, Geboortedatum, Gezondheidsstatus, BaasjeId FROM [Dieren]";
+            using var reader = command.ExecuteReader();
+            reader.Read();
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                if (id == idIngave)
+                {
+                    string naam = (string)reader.GetString(1);
+                    string soort = (string)reader.GetString(2);
+                    string? ras = (string)reader.GetString(3);
+                    string kleur = (string)reader.GetString(4);
+                    DateTime geboortedatum = (DateTime)reader.GetDateTime(5);
+                    string? gezondheidsstatus = (string)reader.GetString(6);
+                    int baasjeId = (int)reader.GetInt32(7);
+                    Klant baasje = klantRepository.GeefOpId(baasjeId);
+
+                    Dier dier = new Dier(naam, soort, kleur, geboortedatum, baasje);
+                    dier.Id = id;
+                    dier.Ras = ras;
+                    dier.Gezondheidsstatus = gezondheidsstatus;
+                    reader.Close();
+                    return dier;
+                }
+
+            }
+            reader.Close();
+            return null;
         }
 
     }

@@ -27,7 +27,7 @@ CREATE TABLE Dieren (
 	Soort NVARCHAR(50) NOT NULL,
 	Ras NVARCHAR(50),
 	Kleur NVARCHAR(50),
-	Geboortedatum DATE NOT NULL,
+	Geboortedatum DATETIME NOT NULL,
 	Gezondheidsstatus NVARCHAR(100),
 	BaasjeId INT NOT NULL,
 	PRIMARY KEY (id),

@@ -52,7 +52,7 @@ namespace Dierenartsenpraktijk.Data
         {
             List<Dierenarts> resultSet = new List<Dierenarts>();
             using var command = _connection.CreateCommand();
-            command.CommandText = "SELECT Id, Voornaam, Achternaam, Telefoonnummer, Specialisatie FROM Dierenartsen;";
+            command.CommandText = "SELECT Id, Voornaam, Achternaam, Telefoonnummer, Specialisatie FROM [Dierenartsen]";
             using var reader = command.ExecuteReader();
             reader.Read();
             while (reader.Read())
@@ -75,7 +75,7 @@ namespace Dierenartsenpraktijk.Data
         {
             List<Dierenarts> resultSet = new List<Dierenarts>();
             using var command = _connection.CreateCommand();
-            command.CommandText = "SELECT Id, Voornaam, Achternaam, Telefoonnummer, Specialisatie FROM Dierenartsen;";
+            command.CommandText = "SELECT Id, Voornaam, Achternaam, Telefoonnummer, Specialisatie FROM [Dierenartsen]";
             using var reader = command.ExecuteReader();
             reader.Read();
             while (reader.Read())
@@ -97,10 +97,10 @@ namespace Dierenartsenpraktijk.Data
         }
 
 
-        public override Dierenarts GeefOpId(int idIngave)
+        public override Dierenarts? GeefOpId(int idIngave)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "SELECT Id, Voornaam, Achternaam, Telefoonnummer, Specialisatie FROM Dierenartsen;";
+            command.CommandText = "SELECT Id, Voornaam, Achternaam, Telefoonnummer, Specialisatie FROM [Dierenartsen]";
             using var reader = command.ExecuteReader();
             reader.Read();
             while (reader.Read())
@@ -114,6 +114,7 @@ namespace Dierenartsenpraktijk.Data
                     SpecialisatieType type = mapSpecialisatieType((string)reader.GetString(4));
                     Dierenarts dierenarts = new Dierenarts(voornaam, achternaam, telefoonnummer, type);
                     dierenarts.Id = id;
+                    reader.Close();
                     return dierenarts;
                 }
             }
