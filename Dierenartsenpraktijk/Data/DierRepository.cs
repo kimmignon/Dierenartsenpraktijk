@@ -18,6 +18,7 @@ namespace Dierenartsenpraktijk.Data
                 "VALUES (@Naam, @Soort, @Ras, @Kleur, @Geboortedatum, @Gezondheidsstatus, @BaasjeId); SELECT SCOPE_IDENTITY()";
             command.Parameters.AddWithValue("@Naam", dier.Naam);
             command.Parameters.AddWithValue("@Soort", dier.Soort);
+            command.Parameters.AddWithValue("@Ras", dier.Ras);
             command.Parameters.AddWithValue("@Kleur", dier.Kleur);
             command.Parameters.AddWithValue("@Geboortedatum", dier.Geboortedatum);
             command.Parameters.AddWithValue("@Gezondheidsstatus", dier.Gezondheidsstatus);
@@ -35,7 +36,8 @@ namespace Dierenartsenpraktijk.Data
             using var command = _connection.CreateCommand();
 
             command.CommandText = "UPDATE [Dieren] SET [Naam] = @Naam, [Soort] = @Soort, [Ras] = @Ras," +
-                "[Kleur] = @Kleur, [Geboortedatum] = @Geboortedatum, [Gezondheidsstatus] = @Gezondheidsstatus, [BaasjeId] = @BaasjeId";
+                "[Kleur] = @Kleur, [Geboortedatum] = @Geboortedatum, [Gezondheidsstatus] = @Gezondheidsstatus, [BaasjeId] = @BaasjeId  WHERE Id = @Id";
+            command.Parameters.AddWithValue("@Id", dier.Id);
             command.Parameters.AddWithValue("@Naam", dier.Naam);
             command.Parameters.AddWithValue("@Soort", dier.Soort);
             command.Parameters.AddWithValue("@Kleur", dier.Kleur);
@@ -50,8 +52,8 @@ namespace Dierenartsenpraktijk.Data
         public override void Delete(Dier dier)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "DELETE FROM [Dieren] WHERE [Id] = @Id";
-            command.Parameters.AddWithValue("Id", dier.Id);
+            command.CommandText = "DELETE FROM [Afspraken] WHERE DierId = @Id; DELETE FROM [Dieren] WHERE [Id] = @Id";
+            command.Parameters.AddWithValue("@Id", dier.Id);
             command.ExecuteNonQuery();
         }
 

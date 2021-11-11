@@ -10,10 +10,10 @@ namespace Dierenartsenpraktijk.Model
     {
         public string Naam {  get; set; }
         public string Soort {  get; set;}
-        public string? Ras {  get; set; }
+        public string? Ras { get; set; } = " ";
         public string Kleur {  get; set; }
         public DateTime Geboortedatum { get; set; }
-        public string? Gezondheidsstatus { get; set; }
+        public string? Gezondheidsstatus { get; set; } = " ";
         public Klant Baasje {  get; set; }
 
         public Dier(string naam, string soort, string kleur, DateTime datum, Klant baasje)

@@ -10,7 +10,7 @@ namespace Dierenartsenpraktijk.Data
     internal class AfspraakRepository:BaseRepository<Afspraak>
     {
         //Functie om nieuwe Afspraak aan te maken
-        protected override Afspraak Insert(Afspraak afspraak)
+        protected override Afspraak Insert(Afspraak afspraak) 
         {
             using var command = _connection.CreateCommand();
 
@@ -34,7 +34,8 @@ namespace Dierenartsenpraktijk.Data
             using var command = _connection.CreateCommand();
 
             command.CommandText = "UPDATE [Afspraken] SET [DatumTijdstip] = @DatumTijdstip, [ArtsId] = @ArtsId," +
-                " [KlantId] = @KlantId, [DierId] = @DierId, [RedenConsult] = @Redenconsult";
+                " [KlantId] = @KlantId, [DierId] = @DierId, [RedenConsult] = @Redenconsult  WHERE Id = @Id";
+            command.Parameters.AddWithValue("@Id", afspraak.Id);
             command.Parameters.AddWithValue("@DatumTijdstip", afspraak.DatumTijdstip);
             command.Parameters.AddWithValue("@ArtsId", afspraak.Arts.Id);
             command.Parameters.AddWithValue("@KlantId", afspraak.Klant.Id);
@@ -49,8 +50,8 @@ namespace Dierenartsenpraktijk.Data
         public override void Delete(Afspraak afspraak)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "DELETE FROM [Dierenartsen] WHERE [Id] = @Id";
-            command.Parameters.AddWithValue("Id", afspraak.Id);
+            command.CommandText = "DELETE FROM [Afspraken] WHERE [Id] = @Id";
+            command.Parameters.AddWithValue("@Id", afspraak.Id);
             command.ExecuteNonQuery();
         }
 

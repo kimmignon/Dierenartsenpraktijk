@@ -18,7 +18,7 @@ namespace Dierenartsenpraktijk.Data
             command.Parameters.AddWithValue("@Voornaam", klant.Voornaam);
             command.Parameters.AddWithValue("@Achternaam", klant.Achternaam);
             command.Parameters.AddWithValue("@Telefoonnummer", klant.Telefoonnummer);
-            command.Parameters.AddWithValue("@Specialisatie", klant.Adres);
+            command.Parameters.AddWithValue("@Adres", klant.Adres);
 
             using var reader = command.ExecuteReader();
             reader.Read();
@@ -30,20 +30,25 @@ namespace Dierenartsenpraktijk.Data
         protected override void Update(Klant klant)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "UPDATE [Klant] SET [Voornaam] = @Voornaam, [Achternaam] = @Achternaam, [Telefoonnummer] = @Telefoonnummer, [Adres] = @Adres";
+            command.CommandText = "UPDATE [Klanten] SET [Voornaam] = @Voornaam, [Achternaam] = @Achternaam, [Telefoonnummer] = @Telefoonnummer, [Adres] = @Adres WHERE Id = @Id";
+            command.Parameters.AddWithValue("@Id", klant.Id);
             command.Parameters.AddWithValue("@Voornaam", klant.Voornaam);
             command.Parameters.AddWithValue("@Achternaam", klant.Achternaam);
             command.Parameters.AddWithValue("@Telefoonnummer", klant.Telefoonnummer);
-            command.Parameters.AddWithValue("@Specialisatie", klant.Adres);
+            command.Parameters.AddWithValue("@Adres", klant.Adres);
 
             command.ExecuteNonQuery();
         }
 
+        //Als klant verwijderd wordt, moeten ook alle zijn huisdieren en zijn afspraken mee worden verwijdered uit database
         public override void Delete(Klant klant)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "DELETE FROM [Klanten] WHERE [Id] = @Id";
-            command.Parameters.AddWithValue("Id", klant.Id);
+            command.CommandText = "DELETE FROM [Dieren] WHERE BaasjeId = @Id; " +
+                "DELETE FROM [Afspraken] WHERE KlantId = @Id;" +
+                "DELETE FROM [Klanten] WHERE Id = @Id";
+            //command.CommandText = "DELETE FROM [Klanten] WHERE Id = @Id";
+            command.Parameters.AddWithValue("@Id", klant.Id);
             command.ExecuteNonQuery();
         }
 

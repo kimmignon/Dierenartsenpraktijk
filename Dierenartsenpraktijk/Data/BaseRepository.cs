@@ -36,6 +36,7 @@ namespace Dierenartsenpraktijk.Data
         protected abstract TEntity Insert(TEntity entiteit);
         protected abstract void Update(TEntity entiteit);
 
+
         //Andere functie voor beheren van database
         public abstract void Delete(TEntity entiteit);
         public abstract List<TEntity> GeefAlle();

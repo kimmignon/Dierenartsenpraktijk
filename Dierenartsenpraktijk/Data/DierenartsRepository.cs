@@ -30,8 +30,9 @@ namespace Dierenartsenpraktijk.Data
         protected override void Update(Dierenarts dierenarts)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "UPDATE [Dierenartsen] SET [Voornaam] = @Voornaam, [Achternaam] = @Achternaam, [Telefoonnummer] = @Telefoonnummer, [Specialisatie] = @Specialisatie";
+            command.CommandText = "UPDATE [Dierenartsen] SET [Voornaam] = @Voornaam, [Achternaam] = @Achternaam, [Telefoonnummer] = @Telefoonnummer, [Specialisatie] = @Specialisatie  WHERE Id = @Id";
             command.Parameters.AddWithValue("@Voornaam", dierenarts.Voornaam);
+            command.Parameters.AddWithValue("@Id", dierenarts.Id);
             command.Parameters.AddWithValue("@Achternaam", dierenarts.Achternaam);
             command.Parameters.AddWithValue("@Telefoonnummer", dierenarts.Telefoonnummer);
             command.Parameters.AddWithValue("@Specialisatie", dierenarts.Specialisatie.ToString());
@@ -39,11 +40,12 @@ namespace Dierenartsenpraktijk.Data
             command.ExecuteNonQuery();
         }
 
+        //Als dierenarts wordt verwijderd worden ook alle afspraken met hem verwijderd
         public override void Delete(Dierenarts dierenarts)
         {
             using var command = _connection.CreateCommand();
-            command.CommandText = "DELETE FROM [Dierenartsen] WHERE [Id] = @Id";
-            command.Parameters.AddWithValue("Id", dierenarts.Id);
+            command.CommandText = "DELETE FROM [Afspraken] WHERE ArtsId = @Id; DELETE FROM [Dierenartsen] WHERE [Id] = @Id";
+            command.Parameters.AddWithValue("@Id", dierenarts.Id);
             command.ExecuteNonQuery();
         }
 
