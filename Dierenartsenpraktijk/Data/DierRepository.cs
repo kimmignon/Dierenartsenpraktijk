@@ -101,7 +101,7 @@ namespace Dierenartsenpraktijk.Data
             while (reader.Read())
             {
                 string naam = (string)reader.GetString(1);
-                if (naam.Contains(naamIngave))
+                if (naam.ToLower().Contains(naamIngave.ToLower()))
                 {
                     int id = reader.GetInt32(0);
                     string soort = (string)reader.GetString(2);

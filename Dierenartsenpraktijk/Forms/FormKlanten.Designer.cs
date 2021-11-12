@@ -51,15 +51,15 @@
             this.labelVoornaam = new System.Windows.Forms.Label();
             this.labelSelectedKlant = new System.Windows.Forms.Label();
             this.tabPageNieuweKlant = new System.Windows.Forms.TabPage();
+            this.buttonVoegToe = new System.Windows.Forms.Button();
+            this.textBoxAdresNieuwe = new System.Windows.Forms.TextBox();
+            this.textBoxTelefoonNieuwe = new System.Windows.Forms.TextBox();
+            this.textBoxAchternaamNieuwe = new System.Windows.Forms.TextBox();
+            this.textBoxVoornaamNieuwe = new System.Windows.Forms.TextBox();
+            this.labelAdresNieuwe = new System.Windows.Forms.Label();
+            this.labelTelefoonNieuwe = new System.Windows.Forms.Label();
             this.labelAchternaamNieuwe = new System.Windows.Forms.Label();
             this.labelVoornaamNieuwe = new System.Windows.Forms.Label();
-            this.labelTelefoonNieuwe = new System.Windows.Forms.Label();
-            this.labelAdresNieuwe = new System.Windows.Forms.Label();
-            this.textBoxVoornaamNieuwe = new System.Windows.Forms.TextBox();
-            this.textBoxAchternaamNieuwe = new System.Windows.Forms.TextBox();
-            this.textBoxTelefoonNieuwe = new System.Windows.Forms.TextBox();
-            this.textBoxAdresNieuwe = new System.Windows.Forms.TextBox();
-            this.buttonVoegToe = new System.Windows.Forms.Button();
             this.tabControlKlanten.SuspendLayout();
             this.tabPageOverzicht.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -184,6 +184,7 @@
             // 
             // buttonUpdate
             // 
+            this.buttonUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonUpdate.Location = new System.Drawing.Point(740, 52);
             this.buttonUpdate.Name = "buttonUpdate";
             this.buttonUpdate.Size = new System.Drawing.Size(157, 49);
@@ -194,6 +195,7 @@
             // 
             // buttonVerwijder
             // 
+            this.buttonVerwijder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonVerwijder.Location = new System.Drawing.Point(753, 213);
             this.buttonVerwijder.Name = "buttonVerwijder";
             this.buttonVerwijder.Size = new System.Drawing.Size(144, 32);
@@ -316,6 +318,64 @@
             this.tabPageNieuweKlant.Text = "Nieuwe klant";
             this.tabPageNieuweKlant.UseVisualStyleBackColor = true;
             // 
+            // buttonVoegToe
+            // 
+            this.buttonVoegToe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonVoegToe.Location = new System.Drawing.Point(564, 247);
+            this.buttonVoegToe.Name = "buttonVoegToe";
+            this.buttonVoegToe.Size = new System.Drawing.Size(208, 37);
+            this.buttonVoegToe.TabIndex = 8;
+            this.buttonVoegToe.Text = "Voeg nieuwe klant toe";
+            this.buttonVoegToe.UseVisualStyleBackColor = true;
+            this.buttonVoegToe.Click += new System.EventHandler(this.buttonVoegToe_Click);
+            // 
+            // textBoxAdresNieuwe
+            // 
+            this.textBoxAdresNieuwe.Location = new System.Drawing.Point(564, 134);
+            this.textBoxAdresNieuwe.Name = "textBoxAdresNieuwe";
+            this.textBoxAdresNieuwe.Size = new System.Drawing.Size(196, 27);
+            this.textBoxAdresNieuwe.TabIndex = 7;
+            // 
+            // textBoxTelefoonNieuwe
+            // 
+            this.textBoxTelefoonNieuwe.Location = new System.Drawing.Point(564, 59);
+            this.textBoxTelefoonNieuwe.Name = "textBoxTelefoonNieuwe";
+            this.textBoxTelefoonNieuwe.Size = new System.Drawing.Size(196, 27);
+            this.textBoxTelefoonNieuwe.TabIndex = 6;
+            // 
+            // textBoxAchternaamNieuwe
+            // 
+            this.textBoxAchternaamNieuwe.Location = new System.Drawing.Point(182, 134);
+            this.textBoxAchternaamNieuwe.Name = "textBoxAchternaamNieuwe";
+            this.textBoxAchternaamNieuwe.Size = new System.Drawing.Size(196, 27);
+            this.textBoxAchternaamNieuwe.TabIndex = 5;
+            // 
+            // textBoxVoornaamNieuwe
+            // 
+            this.textBoxVoornaamNieuwe.Location = new System.Drawing.Point(182, 59);
+            this.textBoxVoornaamNieuwe.Name = "textBoxVoornaamNieuwe";
+            this.textBoxVoornaamNieuwe.Size = new System.Drawing.Size(196, 27);
+            this.textBoxVoornaamNieuwe.TabIndex = 4;
+            // 
+            // labelAdresNieuwe
+            // 
+            this.labelAdresNieuwe.AutoSize = true;
+            this.labelAdresNieuwe.Location = new System.Drawing.Point(414, 134);
+            this.labelAdresNieuwe.Name = "labelAdresNieuwe";
+            this.labelAdresNieuwe.Size = new System.Drawing.Size(47, 20);
+            this.labelAdresNieuwe.TabIndex = 3;
+            this.labelAdresNieuwe.Text = "Adres";
+            // 
+            // labelTelefoonNieuwe
+            // 
+            this.labelTelefoonNieuwe.AutoSize = true;
+            this.labelTelefoonNieuwe.Location = new System.Drawing.Point(414, 62);
+            this.labelTelefoonNieuwe.Name = "labelTelefoonNieuwe";
+            this.labelTelefoonNieuwe.Size = new System.Drawing.Size(132, 20);
+            this.labelTelefoonNieuwe.TabIndex = 2;
+            this.labelTelefoonNieuwe.Text = "Telefoonnummer *";
+            // 
             // labelAchternaamNieuwe
             // 
             this.labelAchternaamNieuwe.AutoSize = true;
@@ -333,64 +393,6 @@
             this.labelVoornaamNieuwe.Size = new System.Drawing.Size(87, 20);
             this.labelVoornaamNieuwe.TabIndex = 0;
             this.labelVoornaamNieuwe.Text = "Voornaam *";
-            // 
-            // labelTelefoonNieuwe
-            // 
-            this.labelTelefoonNieuwe.AutoSize = true;
-            this.labelTelefoonNieuwe.Location = new System.Drawing.Point(414, 62);
-            this.labelTelefoonNieuwe.Name = "labelTelefoonNieuwe";
-            this.labelTelefoonNieuwe.Size = new System.Drawing.Size(132, 20);
-            this.labelTelefoonNieuwe.TabIndex = 2;
-            this.labelTelefoonNieuwe.Text = "Telefoonnummer *";
-            // 
-            // labelAdresNieuwe
-            // 
-            this.labelAdresNieuwe.AutoSize = true;
-            this.labelAdresNieuwe.Location = new System.Drawing.Point(414, 134);
-            this.labelAdresNieuwe.Name = "labelAdresNieuwe";
-            this.labelAdresNieuwe.Size = new System.Drawing.Size(47, 20);
-            this.labelAdresNieuwe.TabIndex = 3;
-            this.labelAdresNieuwe.Text = "Adres";
-            // 
-            // textBoxVoornaamNieuwe
-            // 
-            this.textBoxVoornaamNieuwe.Location = new System.Drawing.Point(182, 59);
-            this.textBoxVoornaamNieuwe.Name = "textBoxVoornaamNieuwe";
-            this.textBoxVoornaamNieuwe.Size = new System.Drawing.Size(196, 27);
-            this.textBoxVoornaamNieuwe.TabIndex = 4;
-            // 
-            // textBoxAchternaamNieuwe
-            // 
-            this.textBoxAchternaamNieuwe.Location = new System.Drawing.Point(182, 134);
-            this.textBoxAchternaamNieuwe.Name = "textBoxAchternaamNieuwe";
-            this.textBoxAchternaamNieuwe.Size = new System.Drawing.Size(196, 27);
-            this.textBoxAchternaamNieuwe.TabIndex = 5;
-            // 
-            // textBoxTelefoonNieuwe
-            // 
-            this.textBoxTelefoonNieuwe.Location = new System.Drawing.Point(564, 59);
-            this.textBoxTelefoonNieuwe.Name = "textBoxTelefoonNieuwe";
-            this.textBoxTelefoonNieuwe.Size = new System.Drawing.Size(196, 27);
-            this.textBoxTelefoonNieuwe.TabIndex = 6;
-            // 
-            // textBoxAdresNieuwe
-            // 
-            this.textBoxAdresNieuwe.Location = new System.Drawing.Point(564, 134);
-            this.textBoxAdresNieuwe.Name = "textBoxAdresNieuwe";
-            this.textBoxAdresNieuwe.Size = new System.Drawing.Size(196, 27);
-            this.textBoxAdresNieuwe.TabIndex = 7;
-            // 
-            // buttonVoegToe
-            // 
-            this.buttonVoegToe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonVoegToe.Location = new System.Drawing.Point(564, 247);
-            this.buttonVoegToe.Name = "buttonVoegToe";
-            this.buttonVoegToe.Size = new System.Drawing.Size(208, 37);
-            this.buttonVoegToe.TabIndex = 8;
-            this.buttonVoegToe.Text = "Voeg nieuwe klant toe";
-            this.buttonVoegToe.UseVisualStyleBackColor = true;
-            this.buttonVoegToe.Click += new System.EventHandler(this.buttonVoegToe_Click);
             // 
             // FormKlanten
             // 

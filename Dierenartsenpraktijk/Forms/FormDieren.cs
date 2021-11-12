@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Dierenartsenpraktijk.Data:
+using Dierenartsenpraktijk.Data;
 using Dierenartsenpraktijk.Model;
 
 namespace Dierenartsenpraktijk.Forms
@@ -25,35 +25,80 @@ namespace Dierenartsenpraktijk.Forms
         }
 
         //Dierrepository om mee te werken
-        DierenartsRepository dierenartsRepository = new DierenartsRepository();
-        //attribuut om dierenartsen in lijst op te slaan
-        List<Dierenarts> LijstDierenartsen = new List<Dierenarts>();
-        //Selected dierenarts
-        Dierenarts selectedArts;
+        DierRepository dierRepository = new DierRepository();
+        //attribuut om dieren in lijst op te slaan
+        List<Dier> LijstDier = new List<Dier>();
+        //Selected diers
+        Dier selectedDier;
 
         //functie om lijst van dierenartsen weer te geven in listbox
-        private void zetDierenartsenInListbox(List<Dierenarts> list)
+        private void zetDierenInListbox(List<Dier> list)
         {
+
             //steeds resetten van geselecteerde arts en textboxen terug leegmaken
-            selectedArts = null;
-            textBoxAchternaam.Text = "";
-            textBoxVoornaam.Text = "";
-            textBoxTelefoonnummer.Text = "";
-            textBoxSpecialisatie.Text = "";
+            selectedDier = null;
+            textBoxNaam.Text = "";
+            textBoxSoort.Text = "";
+            textBoxRas.Text = "";
+            textBoxKleur.Text = "";
+            textBoxStatus.Text = "";
+            textBoxDatum.Text = "";
+            listBoxBaasje.Items.Clear();
 
 
-            listBoxDierenartsen.Items.Clear();
-            listBoxDierenartsen.Items.Add("-Id- \t -Naam- \t \t \t-Telefoon- \t -Specialisatie-");
-            foreach (Dierenarts arts in list)
+            listBoxDieren.Items.Clear();
+            listBoxDieren.Items.Add("-Id- \t -Naam- \t \t -Soort- \t \t -Kleur - \t \t -Baasje- \t \t \t -Geboortedatum-");
+            foreach (Dier dier in list)
             {
-                int? id = arts.Id;
-                string voornaam = arts.Voornaam;
-                string achternaam = arts.Achternaam;
-                int telefoonnummer = arts.Telefoonnummer;
-                SpecialisatieType specialisatie = arts.Specialisatie;
-                string inputItem = id + "\t" + voornaam + " " + achternaam + "\t \t 0" + telefoonnummer + "\t" + specialisatie.ToString();
-                listBoxDierenartsen.Items.Add(inputItem);
+                int? id = dier.Id;
+                string naam = dier.Naam;
+                string soort = dier.Soort;
+                string kleur = dier.Kleur;
+                string baasje = dier.Baasje.Voornaam + " " + dier.Baasje.Achternaam;
+                DateTime datum = dier.Geboortedatum;
+
+                string inputItem = id + "\t" + naam + "\t \t" + soort + "\t \t" + kleur + "\t \t" + baasje + "\t \t" + datum;
+                listBoxDieren.Items.Add(inputItem);
             }
         }
+
+        private void buttonToonAlle_Click(object sender, EventArgs e)
+        {
+            LijstDier = dierRepository.GeefAlle();
+            zetDierenInListbox(LijstDier);
+        }
+
+        private void buttonGeefOpNaam_Click(object sender, EventArgs e)
+        {
+            if (textBoxGeefNaam.Text == "Geef naam in" || textBoxGeefNaam.Text == "")
+            {
+                MessageBox.Show("Geef een naam of een deel van een naam in om dieren te zoeken");
+                return;
+            }
+            LijstDier = dierRepository.GeefOpNaam(textBoxGeefNaam.Text);
+            zetDierenInListbox(LijstDier);
+        }
+
+        private void buttonSelecteer_Click(object sender, EventArgs e)
+        {
+            int index = listBoxDieren.SelectedIndex - 1;
+            if (index < 0)
+            {
+                return;
+            }
+            this.selectedDier = LijstDier[index];
+            labelSelectedDier.Text = "Dier " + selectedDier.Id + ":";
+            textBoxNaam.Text = selectedDier.Naam;
+            textBoxSoort.Text = selectedDier.Soort;
+            textBoxRas.Text = selectedDier.Ras;
+            textBoxKleur.Text = selectedDier.Kleur;
+            textBoxStatus.Text = selectedDier.Gezondheidsstatus;
+            DateTime date = selectedDier.Geboortedatum;
+            textBoxDatum.Text = date.ToString("dd/MM/yyyy");
+            listBoxBaasje.Items.Clear();
+            listBoxBaasje.Items.Add(selectedDier.Baasje.Voornaam + " " + selectedDier.Baasje.Achternaam);
+        }
+
+
     }
 }
