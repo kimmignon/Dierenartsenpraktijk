@@ -16,34 +16,28 @@ namespace Dierenartsenpraktijk
         [STAThread]
         static void Main()
         {
-            //Klant klant = new Klant("Shana", "Donta", 03259647);
-            //klant.Adres = "Kerkweg 16, Aalst";
-            //KlantRepository klantRepository = new KlantRepository();
-            //klantRepository.Opslaan(klant);
+            //Wegens onbekende fout worden nooit de eerste rijen van de databse gegeven, daarom start het programma met het aanmaken van fake objecten
+            //in de database. Dit is nogal omslachting, maar vond de reden niet waarom de eerste rijden niet worden geselecteerd
+            Dierenarts fakeArts = new Dierenarts("Niets", "Niets", 1111111111, SpecialisatieType.KattenEnHonden);
+            fakeArts.Id = 1;
+            DierenartsRepository dierenartsRepository= new DierenartsRepository();
+            dierenartsRepository.Opslaan(fakeArts);
 
-            //DateTime dateTime = new DateTime(2019,11,13);
-            //Dier dier = new Dier("Fifi", "Hond", "bruin", dateTime, klant);
-            //dier.Ras = "Labrador";
-            //dier.Gezondheidsstatus = "Huidallergie";
-            //DierRepository dierRepository = new DierRepository();
-            //dierRepository.Opslaan(dier);
+            Klant fakeKlant = new Klant("Niets", "Niets", 000000);
+            fakeKlant.Id = 1;
+            KlantRepository klantRepository = new KlantRepository();
+            klantRepository.Opslaan(fakeKlant);
 
-            //SpecialisatieType specialisatie = new SpecialisatieType();
-            //specialisatie = SpecialisatieType.KattenEnHonden;
-            //Dierenarts dierenarts = new Dierenarts("Ellen", "Mignon", 1458686, specialisatie);
-            //DierenartsRepository dierenartsRepository = new DierenartsRepository();
-            //dierenarts.Id = 22;
-            //dierenartsRepository.Opslaan(dierenarts);
+            Dier fakeDier = new Dier("Niets", "Niets", "Niets", new DateTime(1753, 11, 11), fakeKlant);
+            fakeDier.Id = 1;
+            DierRepository dierRepository = new DierRepository();
+            dierRepository.Opslaan(fakeDier);
 
-            //DateTime dateTime2 = new DateTime(2021, 11, 16, 17, 55, 00);
-            //RedenAfspraak reden = RedenAfspraak.Ophalen;
-            //Afspraak afspraak = new Afspraak(dateTime2, dierenarts, klant, dier, reden);
-            //AfspraakRepository afspraakRepository = new AfspraakRepository();
-            //afspraak.Id = 1;
-            //afspraakRepository.Opslaan(afspraak);
-
-
-
+           
+            Afspraak fakeAfspraak = new Afspraak(new DateTime(1753, 11, 11), fakeArts, fakeKlant, fakeDier, RedenAfspraak.Consult);
+            fakeAfspraak.Id = 1;
+            AfspraakRepository afspraakRepository= new AfspraakRepository();
+            afspraakRepository.Opslaan(fakeAfspraak);
 
 
             ApplicationConfiguration.Initialize();
