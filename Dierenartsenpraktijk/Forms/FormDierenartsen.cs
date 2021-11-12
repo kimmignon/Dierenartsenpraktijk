@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dierenartsenpraktijk.Model;
+using Dierenartsenpraktijk.Data;
 
 namespace Dierenartsenpraktijk.Forms
 {
@@ -20,6 +22,133 @@ namespace Dierenartsenpraktijk.Forms
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        //Dierenarts repository om mee te werken
+        DierenartsRepository dierenartsRepository = new DierenartsRepository();
+        //attribuut om dierenartsen in lijst op te slaan
+        List<Dierenarts> LijstDierenartsen = new List<Dierenarts>();
+        //Selected dierenarts
+        Dierenarts selectedArts;
+
+        //functie om lijst van dierenartsen weer te geven in listbox
+        private void zetDierenartsenInListbox(List<Dierenarts> list)
+        {
+            //steeds resetten van geselecteerde arts en textboxen terug leegmaken
+            selectedArts = null;
+            textBoxAchternaam.Text = "";
+            textBoxVoornaam.Text = "";
+            textBoxTelefoonnummer.Text = "";
+            textBoxSpecialisatie.Text = "";
+
+
+            listBoxDierenartsen.Items.Clear();
+            listBoxDierenartsen.Items.Add("-Id- \t -Naam- \t \t \t-Telefoon- \t -Specialisatie-");
+            foreach (Dierenarts arts in list)
+            {
+                int? id = arts.Id;
+                string voornaam = arts.Voornaam;
+                string achternaam = arts.Achternaam;
+                int telefoonnummer = arts.Telefoonnummer;
+                SpecialisatieType specialisatie = arts.Specialisatie;
+                string inputItem = id + "\t" + voornaam + " " + achternaam + "\t \t 0" + telefoonnummer + "\t" + specialisatie.ToString(); 
+                listBoxDierenartsen.Items.Add(inputItem);
+            }
+        }
+
+        private void buttonToonAlle_Click(object sender, EventArgs e)
+        {
+           LijstDierenartsen = dierenartsRepository.GeefAlle();
+           zetDierenartsenInListbox(LijstDierenartsen);
+        }
+
+
+        //Dit is de buttonGeefOpNaam (iets fout gegaan met naamgeveing hier)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if(textBoxNaamIngave.Text == "Geef naam in" || textBoxNaamIngave.Text == "")
+            {
+                MessageBox.Show("Geef een naam of een deel van een naam in om dierenartsen te zoeken");
+                return;
+            }
+            LijstDierenartsen = dierenartsRepository.GeefOpNaam(textBoxNaamIngave.Text);
+            zetDierenartsenInListbox(LijstDierenartsen);
+        }
+
+
+        private void buttonSelecteer_Click(object sender, EventArgs e)
+        {
+            int index = listBoxDierenartsen.SelectedIndex - 1;
+            this.selectedArts = LijstDierenartsen[index];
+            labelSelectedArts.Text = "Dierenarts " + selectedArts.Id + ":";
+            textBoxVoornaam.Text = selectedArts.Voornaam;
+            textBoxAchternaam.Text = selectedArts.Achternaam;
+            textBoxTelefoonnummer.Text = selectedArts.Telefoonnummer.ToString();
+            textBoxSpecialisatie.Text = selectedArts.Specialisatie.ToString();
+        }
+
+        private void buttonVerwijder_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(selectedArts.Voornaam + " " + selectedArts.Achternaam + "[id: " + selectedArts.Id + "] werd verwijderd uit de database");
+            dierenartsRepository.Delete(this.selectedArts);
+            //steeds resetten van geselecteerde arts en textboxen terug leegmaken
+            selectedArts = null;
+            textBoxAchternaam.Text = "";
+            textBoxVoornaam.Text = "";
+            textBoxTelefoonnummer.Text = "";
+            textBoxSpecialisatie.Text = "";
+            
+        }
+
+
+
+
+
+        //methode om ingave van correct telefoonnummer te controleren
+        public bool foutTelefoonnummer(string textIngave)
+        {
+            foreach(char i in textIngave.ToCharArray())
+            {
+                if (!char.IsDigit(i))
+                {
+                    return true;
+                }
+            }
+            if(textIngave.Length != 10)
+            {
+
+                return true;
+            }
+            return false;
+        }
+
+        //methode om ingave specialisatie type te controleren
+        public bool foutSpecialisatietype(string textIngave)
+        {
+            textIngave = textIngave.ToLower();
+            if(textIngave == "kattenenhonden" || textIngave == "reptielen" || textIngave == "vogels" || textIngave == "knaagdieren")
+            {
+                return false;
+            }
+            return true;
+        }
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (foutTelefoonnummer(textBoxTelefoonnummer.Text)){
+                MessageBox.Show("Telefoonnummer kan enkel uit cijfers bestaan en moet 10 cijfers lang zijn");
+                return;
+            }
+            if (foutSpecialisatietype(textBoxSpecialisatie.Text)){
+                MessageBox.Show("Incorrecte specialisatie, kies uit: KattenEnHonden, Reptielen, Vogels of Knaagdieren");
+                return;
+            }
+            selectedArts.Voornaam = textBoxVoornaam.Text;
+            selectedArts.Achternaam = textBoxAchternaam.Text;
+            selectedArts.Telefoonnummer = 0 + Int32.Parse(textBoxTelefoonnummer.Text);
+            selectedArts.Specialisatie = dierenartsRepository.mapSpecialisatieType(textBoxSpecialisatie.Text);
+            dierenartsRepository.Opslaan(selectedArts);
+            MessageBox.Show("Dierenarts: " + selectedArts.ToString() + " werd geupdated");
         }
     }
 }

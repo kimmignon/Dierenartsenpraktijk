@@ -21,7 +21,7 @@ namespace Dierenartsenpraktijk.Model
 
         public override string ToString()
         {
-            return this.GetType + this.Voornaam + " " + this.Achternaam + ", tel: " + this.Telefoonnummer;
+            return this.Voornaam + " " + this.Achternaam + ", tel: 0" + this.Telefoonnummer;
         }
     }
 }

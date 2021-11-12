@@ -83,10 +83,10 @@ namespace Dierenartsenpraktijk.Data
             while (reader.Read())
             {
                 string voornaam = (string)reader.GetString(1);
-                if (voornaam.Contains(naamIngave))
+                string achternaam = (string)reader.GetString(2);
+                if (voornaam.ToLower().Contains(naamIngave.ToLower()) || achternaam.ToLower().Contains(naamIngave.ToLower()))
                 {
                     int id = reader.GetInt32(0);
-                    string achternaam = (string)reader.GetString(2);
                     int telefoonnummer = (int)reader.GetInt32(3);
                     SpecialisatieType type = mapSpecialisatieType((string)reader.GetString(4));
                     Dierenarts dierenarts = new Dierenarts(voornaam, achternaam, telefoonnummer, type);
@@ -124,7 +124,7 @@ namespace Dierenartsenpraktijk.Data
         }
 
         //Functie om het Specialisatietype vanuit database (string) te mappen op deze van object Dierenarts (enum Specialisatietype)
-        protected SpecialisatieType mapSpecialisatieType(string DbValue)
+        public SpecialisatieType mapSpecialisatieType(string DbValue)
         {
             SpecialisatieType returnType = new SpecialisatieType();
             switch (DbValue)
