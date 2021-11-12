@@ -79,6 +79,10 @@ namespace Dierenartsenpraktijk.Forms
         private void buttonSelecteer_Click(object sender, EventArgs e)
         {
             int index = listBoxDierenartsen.SelectedIndex - 1;
+            if (index < 0)
+            {
+                return;
+            }
             this.selectedArts = LijstDierenartsen[index];
             labelSelectedArts.Text = "Dierenarts " + selectedArts.Id + ":";
             textBoxVoornaam.Text = selectedArts.Voornaam;
@@ -107,7 +111,11 @@ namespace Dierenartsenpraktijk.Forms
         //methode om ingave van correct telefoonnummer te controleren
         private bool foutTelefoonnummer(string textIngave)
         {
-            if(textIngave.ToCharArray()[0] != '0' || textIngave.ToCharArray()[1] != '4' || textIngave.ToCharArray()[2] != '7')
+            if (textIngave == "" || textIngave == null)
+            {
+                return true;
+            }
+            if (textIngave.ToCharArray()[0] != '0' || textIngave.ToCharArray()[1] != '4' || textIngave.ToCharArray()[2] != '7')
             {
                 return true;
             }
@@ -140,12 +148,12 @@ namespace Dierenartsenpraktijk.Forms
         //Updaten van gegevens van bestaande dierenartsen
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
-            if (textBoxVoornaamNieuwe.Text == null || textBoxVoornaamNieuwe.Text == "")
+            if (textBoxVoornaam.Text == null || textBoxVoornaam.Text == "")
             {
                 MessageBox.Show("Vul een voornaam in");
                 return;
             }
-            if (textBoxAchternaamNieuwe.Text == null || textBoxAchternaamNieuwe.Text == "")
+            if (textBoxAchternaam.Text == null || textBoxAchternaam.Text == "")
             {
                 MessageBox.Show("Vul een achternaam in");
                 return;

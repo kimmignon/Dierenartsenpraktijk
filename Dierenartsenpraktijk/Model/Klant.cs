@@ -15,19 +15,10 @@ namespace Dierenartsenpraktijk.Model
         {
         }
 
-        public void VoegHuisdierToe(Dier dier)
-        {
-            this.Huisdieren.Add(dier);
-        }
-
-        public void VerwijderHuisdier(Dier dier)
-        {
-            this.Huisdieren.Remove(dier);
-        }
 
         public override string ToString()
         {
-            return base.ToString() + " , huisdieren: " + this.Huisdieren;
+            return base.ToString();
         }
     }
 

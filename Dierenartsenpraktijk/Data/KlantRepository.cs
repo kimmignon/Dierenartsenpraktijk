@@ -89,10 +89,11 @@ namespace Dierenartsenpraktijk.Data
             while (reader.Read())
             {
                 string voornaam = (string)reader.GetString(1);
-                if (voornaam.Contains(naamIngave))
+                string achternaam = (string)reader.GetString(2);
+                if (voornaam.ToLower().Contains(naamIngave.ToLower()) || achternaam.ToLower().Contains(naamIngave.ToLower()))
                 {
                     int id = reader.GetInt32(0);
-                    string achternaam = (string)reader.GetString(2);
+                    
                     int telefoonnummer = (int)reader.GetInt32(3);
                     string adres = (string)reader.GetString(4);
 
@@ -132,6 +133,32 @@ namespace Dierenartsenpraktijk.Data
                 }
             }
             return null;
+        }
+
+        //Functie om de dieren van de klant te geven
+        public void GeefDierenKlant(Klant klant)
+        {
+            using var command = _connection.CreateCommand();
+            command.CommandText = "SELECT Id, Naam, Soort, Ras, Kleur, Geboortedatum, Gezondheidsstatus, BaasjeId FROM [Dieren] WHERE BaasjeId = @Id";
+            command.Parameters.AddWithValue("@Id", klant.Id);
+            using var reader = command.ExecuteReader();
+            reader.Read();
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                string naam = (string)reader.GetString(1);
+                string soort = (string)reader.GetString(2);
+                string? ras = (string)reader.GetString(3);
+                string kleur = (string)reader.GetString(4);
+                DateTime geboortedatum = (DateTime)reader.GetDateTime(5);
+                string? gezondheidsstatus = (string)reader.GetString(6);
+
+                Dier dier = new Dier(naam, soort, kleur, geboortedatum, klant);
+                dier.Id = id;
+                dier.Ras = ras;
+                dier.Gezondheidsstatus = gezondheidsstatus;
+                klant.Huisdieren.Add(dier);
+            }
         }
     }
 }
