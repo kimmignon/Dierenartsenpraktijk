@@ -37,6 +37,7 @@ namespace Dierenartsenpraktijk.Forms
 
             //steeds resetten van geselecteerde arts en textboxen terug leegmaken
             selectedDier = null;
+            selectedKlant = null;
             textBoxNaam.Text = "";
             textBoxSoort.Text = "";
             textBoxRas.Text = "";
@@ -97,8 +98,63 @@ namespace Dierenartsenpraktijk.Forms
             textBoxDatum.Text = date.ToString("dd/MM/yyyy");
             listBoxBaasje.Items.Clear();
             listBoxBaasje.Items.Add(selectedDier.Baasje.Voornaam + " " + selectedDier.Baasje.Achternaam);
+            selectedKlant = selectedDier.Baasje;
         }
 
+        //nu alles om klant te zoeken en te selecteren voor eventueel dier te updaten (dier kan namelijk van baasje veranderen)
+        List<Klant> LijstKlanten = new List<Klant>();
+        Klant selectedKlant;
+        KlantRepository klantenRepository = new KlantRepository();
+        private void zetKlantenInListbox(List<Klant> list)
+        {
+            //steeds resetten van geselecteerde klant en textboxen terug leegmaken
 
+            selectedKlant = null;
+            listBoxKlanten.Items.Clear();
+            listBoxKlanten.Items.Add("-Id- \t -Naam- \t \t -Telefoon-");
+            foreach (Klant klant in list)
+            {
+                int? id = klant.Id;
+                string voornaam = klant.Voornaam;
+                string achternaam = klant.Achternaam;
+                int telefoon = klant.Telefoonnummer;
+                string inputItem = id + "\t" + voornaam + " " + achternaam + "\t" + telefoon;
+                listBoxKlanten.Items.Add(inputItem);
+            }
+        }
+
+        private void buttonAlleKlanten_Click(object sender, EventArgs e)
+        {
+            LijstKlanten = klantenRepository.GeefAlle();
+            zetKlantenInListbox(LijstKlanten);
+        }
+
+        private void buttonNaamKlant_Click(object sender, EventArgs e)
+        {
+            if (textBoxNaamKlant.Text == "Geef naam in" || textBoxNaamKlant.Text == "")
+            {
+                MessageBox.Show("Geef een naam of een deel van een naam in om dierenartsen te zoeken");
+                return;
+            }
+            LijstKlanten = klantenRepository.GeefOpNaam(textBoxNaamKlant.Text);
+            zetKlantenInListbox(LijstKlanten);
+        }
+
+        private void buttonSelecteerKlant_Click(object sender, EventArgs e)
+        {
+            if(selectedDier == null)
+            {
+                return;
+            }
+            int index = listBoxKlanten.SelectedIndex - 1;
+            if (index < 0)
+            {
+                return;
+            }
+            this.selectedKlant = LijstKlanten[index];
+            selectedDier.Baasje = selectedKlant;
+            listBoxBaasje.Items.Clear();
+            listBoxBaasje.Items.Add(selectedDier.Baasje.Voornaam + " " + selectedDier.Baasje.Achternaam);
+        }
     }
 }

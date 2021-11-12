@@ -32,31 +32,35 @@
             this.tabControlDieren = new System.Windows.Forms.TabControl();
             this.tabPageOverzicht = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelSelectedDier = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.buttonVerwijder = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.listBoxBaasje = new System.Windows.Forms.ListBox();
             this.labelBaasje = new System.Windows.Forms.Label();
+            this.labelDatum = new System.Windows.Forms.Label();
             this.textBoxDatum = new System.Windows.Forms.TextBox();
+            this.labelSelectedDier = new System.Windows.Forms.Label();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.textBoxKleur = new System.Windows.Forms.TextBox();
             this.textBoxRas = new System.Windows.Forms.TextBox();
             this.textBoxSoort = new System.Windows.Forms.TextBox();
             this.textBoxNaam = new System.Windows.Forms.TextBox();
             this.labelStatus = new System.Windows.Forms.Label();
-            this.labelDatum = new System.Windows.Forms.Label();
             this.labelKleur = new System.Windows.Forms.Label();
             this.labelRas = new System.Windows.Forms.Label();
             this.labelSoort = new System.Windows.Forms.Label();
             this.labelNaam = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonSelecteerKlant = new System.Windows.Forms.Button();
+            this.listBoxKlanten = new System.Windows.Forms.ListBox();
+            this.textBoxNaamKlant = new System.Windows.Forms.TextBox();
+            this.buttonNaamKlant = new System.Windows.Forms.Button();
+            this.buttonAlleKlanten = new System.Windows.Forms.Button();
             this.buttonSelecteer = new System.Windows.Forms.Button();
             this.listBoxDieren = new System.Windows.Forms.ListBox();
             this.textBoxGeefNaam = new System.Windows.Forms.TextBox();
             this.buttonGeefOpNaam = new System.Windows.Forms.Button();
             this.buttonToonAlle = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.buttonAlleKlanten = new System.Windows.Forms.Button();
             this.tabControlDieren.SuspendLayout();
             this.tabPageOverzicht.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -110,47 +114,28 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.panel1.Controls.Add(this.labelSelectedDier);
-            this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.buttonVerwijder);
             this.panel1.Controls.Add(this.buttonUpdate);
             this.panel1.Controls.Add(this.listBoxBaasje);
             this.panel1.Controls.Add(this.labelBaasje);
+            this.panel1.Controls.Add(this.labelDatum);
             this.panel1.Controls.Add(this.textBoxDatum);
+            this.panel1.Controls.Add(this.labelSelectedDier);
             this.panel1.Controls.Add(this.textBoxStatus);
             this.panel1.Controls.Add(this.textBoxKleur);
             this.panel1.Controls.Add(this.textBoxRas);
             this.panel1.Controls.Add(this.textBoxSoort);
             this.panel1.Controls.Add(this.textBoxNaam);
             this.panel1.Controls.Add(this.labelStatus);
-            this.panel1.Controls.Add(this.labelDatum);
             this.panel1.Controls.Add(this.labelKleur);
             this.panel1.Controls.Add(this.labelRas);
             this.panel1.Controls.Add(this.labelSoort);
             this.panel1.Controls.Add(this.labelNaam);
+            this.panel1.Controls.Add(this.panel2);
             this.panel1.Location = new System.Drawing.Point(3, 258);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(925, 270);
             this.panel1.TabIndex = 5;
-            // 
-            // labelSelectedDier
-            // 
-            this.labelSelectedDier.AutoSize = true;
-            this.labelSelectedDier.ForeColor = System.Drawing.Color.Navy;
-            this.labelSelectedDier.Location = new System.Drawing.Point(17, 0);
-            this.labelSelectedDier.Name = "labelSelectedDier";
-            this.labelSelectedDier.Size = new System.Drawing.Size(40, 20);
-            this.labelSelectedDier.TabIndex = 0;
-            this.labelSelectedDier.Text = "Dier:";
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.LightBlue;
-            this.panel2.Controls.Add(this.buttonAlleKlanten);
-            this.panel2.Location = new System.Drawing.Point(354, 105);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(571, 168);
-            this.panel2.TabIndex = 16;
             // 
             // buttonVerwijder
             // 
@@ -190,12 +175,31 @@
             this.labelBaasje.TabIndex = 12;
             this.labelBaasje.Text = "Baasje";
             // 
+            // labelDatum
+            // 
+            this.labelDatum.AutoSize = true;
+            this.labelDatum.Location = new System.Drawing.Point(354, 34);
+            this.labelDatum.Name = "labelDatum";
+            this.labelDatum.Size = new System.Drawing.Size(115, 20);
+            this.labelDatum.TabIndex = 4;
+            this.labelDatum.Text = "Geboortedatum";
+            // 
             // textBoxDatum
             // 
             this.textBoxDatum.Location = new System.Drawing.Point(487, 27);
             this.textBoxDatum.Name = "textBoxDatum";
             this.textBoxDatum.Size = new System.Drawing.Size(187, 27);
             this.textBoxDatum.TabIndex = 11;
+            // 
+            // labelSelectedDier
+            // 
+            this.labelSelectedDier.AutoSize = true;
+            this.labelSelectedDier.ForeColor = System.Drawing.Color.Navy;
+            this.labelSelectedDier.Location = new System.Drawing.Point(17, 0);
+            this.labelSelectedDier.Name = "labelSelectedDier";
+            this.labelSelectedDier.Size = new System.Drawing.Size(40, 20);
+            this.labelSelectedDier.TabIndex = 0;
+            this.labelSelectedDier.Text = "Dier:";
             // 
             // textBoxStatus
             // 
@@ -243,15 +247,6 @@
             this.labelStatus.TabIndex = 5;
             this.labelStatus.Text = "Gezondheidsstatus:";
             // 
-            // labelDatum
-            // 
-            this.labelDatum.AutoSize = true;
-            this.labelDatum.Location = new System.Drawing.Point(354, 34);
-            this.labelDatum.Name = "labelDatum";
-            this.labelDatum.Size = new System.Drawing.Size(115, 20);
-            this.labelDatum.TabIndex = 4;
-            this.labelDatum.Text = "Geboortedatum";
-            // 
             // labelKleur
             // 
             this.labelKleur.AutoSize = true;
@@ -287,6 +282,66 @@
             this.labelNaam.Size = new System.Drawing.Size(49, 20);
             this.labelNaam.TabIndex = 0;
             this.labelNaam.Text = "Naam";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.LightBlue;
+            this.panel2.Controls.Add(this.buttonSelecteerKlant);
+            this.panel2.Controls.Add(this.listBoxKlanten);
+            this.panel2.Controls.Add(this.textBoxNaamKlant);
+            this.panel2.Controls.Add(this.buttonNaamKlant);
+            this.panel2.Controls.Add(this.buttonAlleKlanten);
+            this.panel2.Location = new System.Drawing.Point(354, 115);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(571, 158);
+            this.panel2.TabIndex = 16;
+            // 
+            // buttonSelecteerKlant
+            // 
+            this.buttonSelecteerKlant.Location = new System.Drawing.Point(374, 4);
+            this.buttonSelecteerKlant.Name = "buttonSelecteerKlant";
+            this.buttonSelecteerKlant.Size = new System.Drawing.Size(146, 29);
+            this.buttonSelecteerKlant.TabIndex = 4;
+            this.buttonSelecteerKlant.Text = "Selecteer klant";
+            this.buttonSelecteerKlant.UseVisualStyleBackColor = true;
+            this.buttonSelecteerKlant.Click += new System.EventHandler(this.buttonSelecteerKlant_Click);
+            // 
+            // listBoxKlanten
+            // 
+            this.listBoxKlanten.FormattingEnabled = true;
+            this.listBoxKlanten.ItemHeight = 20;
+            this.listBoxKlanten.Location = new System.Drawing.Point(163, 40);
+            this.listBoxKlanten.Name = "listBoxKlanten";
+            this.listBoxKlanten.Size = new System.Drawing.Size(375, 104);
+            this.listBoxKlanten.TabIndex = 3;
+            // 
+            // textBoxNaamKlant
+            // 
+            this.textBoxNaamKlant.Location = new System.Drawing.Point(16, 106);
+            this.textBoxNaamKlant.Name = "textBoxNaamKlant";
+            this.textBoxNaamKlant.Size = new System.Drawing.Size(131, 27);
+            this.textBoxNaamKlant.TabIndex = 2;
+            this.textBoxNaamKlant.Text = "Geef naam in";
+            // 
+            // buttonNaamKlant
+            // 
+            this.buttonNaamKlant.Location = new System.Drawing.Point(16, 60);
+            this.buttonNaamKlant.Name = "buttonNaamKlant";
+            this.buttonNaamKlant.Size = new System.Drawing.Size(131, 29);
+            this.buttonNaamKlant.TabIndex = 1;
+            this.buttonNaamKlant.Text = "Zoek op naam";
+            this.buttonNaamKlant.UseVisualStyleBackColor = true;
+            this.buttonNaamKlant.Click += new System.EventHandler(this.buttonNaamKlant_Click);
+            // 
+            // buttonAlleKlanten
+            // 
+            this.buttonAlleKlanten.Location = new System.Drawing.Point(16, 14);
+            this.buttonAlleKlanten.Name = "buttonAlleKlanten";
+            this.buttonAlleKlanten.Size = new System.Drawing.Size(131, 29);
+            this.buttonAlleKlanten.TabIndex = 0;
+            this.buttonAlleKlanten.Text = "Toon klanten";
+            this.buttonAlleKlanten.UseVisualStyleBackColor = true;
+            this.buttonAlleKlanten.Click += new System.EventHandler(this.buttonAlleKlanten_Click);
             // 
             // buttonSelecteer
             // 
@@ -348,15 +403,6 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // buttonAlleKlanten
-            // 
-            this.buttonAlleKlanten.Location = new System.Drawing.Point(6, 14);
-            this.buttonAlleKlanten.Name = "buttonAlleKlanten";
-            this.buttonAlleKlanten.Size = new System.Drawing.Size(131, 29);
-            this.buttonAlleKlanten.TabIndex = 0;
-            this.buttonAlleKlanten.Text = "Toon klanten";
-            this.buttonAlleKlanten.UseVisualStyleBackColor = true;
-            // 
             // FormDieren
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -373,6 +419,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -383,7 +430,7 @@
         private System.Windows.Forms.TabControl tabControlDieren;
         private System.Windows.Forms.TabPage tabPageOverzicht;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonNaamKlant;
         private System.Windows.Forms.Button buttonToonAlle;
         private System.Windows.Forms.TextBox textBoxGeefNaam;
         private System.Windows.Forms.Button buttonGeefOpNaam;
@@ -409,5 +456,8 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelSelectedDier;
         private System.Windows.Forms.Button buttonAlleKlanten;
+        private System.Windows.Forms.ListBox listBoxKlanten;
+        private System.Windows.Forms.TextBox textBoxNaamKlant;
+        private System.Windows.Forms.Button buttonSelecteerKlant;
     }
 }
