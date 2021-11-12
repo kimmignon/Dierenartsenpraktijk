@@ -104,6 +104,11 @@ namespace Dierenartsenpraktijk.Forms
 
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
+            if (selectedKlant == null)
+            {
+                return;
+            }
+
             MessageBox.Show(selectedKlant.Voornaam + " " + selectedKlant.Achternaam + "[id: " + selectedKlant.Id + "] werd verwijderd uit de database");
             klantenRepository.Delete(this.selectedKlant);
             //steeds resetten van geselecteerde klant en textboxen terug leegmaken

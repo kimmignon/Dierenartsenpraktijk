@@ -93,6 +93,10 @@ namespace Dierenartsenpraktijk.Forms
 
         private void buttonVerwijder_Click(object sender, EventArgs e)
         {
+            if (selectedArts == null)
+            {
+                return;
+            }
             MessageBox.Show(selectedArts.Voornaam + " " + selectedArts.Achternaam + "[id: " + selectedArts.Id + "] werd verwijderd uit de database");
             dierenartsRepository.Delete(this.selectedArts);
             //steeds resetten van geselecteerde arts en textboxen terug leegmaken

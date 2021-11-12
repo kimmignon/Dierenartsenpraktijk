@@ -32,12 +32,12 @@
             this.tabControlDieren = new System.Windows.Forms.TabControl();
             this.tabPageOverzicht = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.dateTimePickerDier = new System.Windows.Forms.DateTimePicker();
             this.buttonVerwijder = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.listBoxBaasje = new System.Windows.Forms.ListBox();
             this.labelBaasje = new System.Windows.Forms.Label();
             this.labelDatum = new System.Windows.Forms.Label();
-            this.textBoxDatum = new System.Windows.Forms.TextBox();
             this.labelSelectedDier = new System.Windows.Forms.Label();
             this.textBoxStatus = new System.Windows.Forms.TextBox();
             this.textBoxKleur = new System.Windows.Forms.TextBox();
@@ -60,7 +60,7 @@
             this.textBoxGeefNaam = new System.Windows.Forms.TextBox();
             this.buttonGeefOpNaam = new System.Windows.Forms.Button();
             this.buttonToonAlle = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPageVoegToe = new System.Windows.Forms.TabPage();
             this.tabControlDieren.SuspendLayout();
             this.tabPageOverzicht.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -85,7 +85,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControlDieren.Controls.Add(this.tabPageOverzicht);
-            this.tabControlDieren.Controls.Add(this.tabPage2);
+            this.tabControlDieren.Controls.Add(this.tabPageVoegToe);
             this.tabControlDieren.Location = new System.Drawing.Point(-1, 22);
             this.tabControlDieren.Name = "tabControlDieren";
             this.tabControlDieren.SelectedIndex = 0;
@@ -114,12 +114,12 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel1.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.panel1.Controls.Add(this.dateTimePickerDier);
             this.panel1.Controls.Add(this.buttonVerwijder);
             this.panel1.Controls.Add(this.buttonUpdate);
             this.panel1.Controls.Add(this.listBoxBaasje);
             this.panel1.Controls.Add(this.labelBaasje);
             this.panel1.Controls.Add(this.labelDatum);
-            this.panel1.Controls.Add(this.textBoxDatum);
             this.panel1.Controls.Add(this.labelSelectedDier);
             this.panel1.Controls.Add(this.textBoxStatus);
             this.panel1.Controls.Add(this.textBoxKleur);
@@ -137,6 +137,14 @@
             this.panel1.Size = new System.Drawing.Size(925, 270);
             this.panel1.TabIndex = 5;
             // 
+            // dateTimePickerDier
+            // 
+            this.dateTimePickerDier.Location = new System.Drawing.Point(475, 30);
+            this.dateTimePickerDier.Name = "dateTimePickerDier";
+            this.dateTimePickerDier.Size = new System.Drawing.Size(250, 27);
+            this.dateTimePickerDier.TabIndex = 6;
+            this.dateTimePickerDier.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            // 
             // buttonVerwijder
             // 
             this.buttonVerwijder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -146,6 +154,7 @@
             this.buttonVerwijder.TabIndex = 15;
             this.buttonVerwijder.Text = "Verwijder dier";
             this.buttonVerwijder.UseVisualStyleBackColor = true;
+            this.buttonVerwijder.Click += new System.EventHandler(this.buttonVerwijder_Click);
             // 
             // buttonUpdate
             // 
@@ -156,6 +165,7 @@
             this.buttonUpdate.TabIndex = 14;
             this.buttonUpdate.Text = "Update gegevens";
             this.buttonUpdate.UseVisualStyleBackColor = true;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // listBoxBaasje
             // 
@@ -183,13 +193,6 @@
             this.labelDatum.Size = new System.Drawing.Size(115, 20);
             this.labelDatum.TabIndex = 4;
             this.labelDatum.Text = "Geboortedatum";
-            // 
-            // textBoxDatum
-            // 
-            this.textBoxDatum.Location = new System.Drawing.Point(487, 27);
-            this.textBoxDatum.Name = "textBoxDatum";
-            this.textBoxDatum.Size = new System.Drawing.Size(187, 27);
-            this.textBoxDatum.TabIndex = 11;
             // 
             // labelSelectedDier
             // 
@@ -393,15 +396,15 @@
             this.buttonToonAlle.UseVisualStyleBackColor = true;
             this.buttonToonAlle.Click += new System.EventHandler(this.buttonToonAlle_Click);
             // 
-            // tabPage2
+            // tabPageVoegToe
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 29);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(935, 531);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageVoegToe.Location = new System.Drawing.Point(4, 29);
+            this.tabPageVoegToe.Name = "tabPageVoegToe";
+            this.tabPageVoegToe.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageVoegToe.Size = new System.Drawing.Size(935, 531);
+            this.tabPageVoegToe.TabIndex = 1;
+            this.tabPageVoegToe.Text = "Nieuw dier";
+            this.tabPageVoegToe.UseVisualStyleBackColor = true;
             // 
             // FormDieren
             // 
@@ -429,7 +432,7 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.TabControl tabControlDieren;
         private System.Windows.Forms.TabPage tabPageOverzicht;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPageVoegToe;
         private System.Windows.Forms.Button buttonNaamKlant;
         private System.Windows.Forms.Button buttonToonAlle;
         private System.Windows.Forms.TextBox textBoxGeefNaam;
@@ -450,7 +453,6 @@
         private System.Windows.Forms.TextBox textBoxNaam;
         private System.Windows.Forms.ListBox listBoxBaasje;
         private System.Windows.Forms.Label labelBaasje;
-        private System.Windows.Forms.TextBox textBoxDatum;
         private System.Windows.Forms.Button buttonVerwijder;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Panel panel2;
@@ -459,5 +461,6 @@
         private System.Windows.Forms.ListBox listBoxKlanten;
         private System.Windows.Forms.TextBox textBoxNaamKlant;
         private System.Windows.Forms.Button buttonSelecteerKlant;
+        private System.Windows.Forms.DateTimePicker dateTimePickerDier;
     }
 }

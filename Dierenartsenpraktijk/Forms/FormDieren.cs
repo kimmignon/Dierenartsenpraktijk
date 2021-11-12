@@ -43,7 +43,7 @@ namespace Dierenartsenpraktijk.Forms
             textBoxRas.Text = "";
             textBoxKleur.Text = "";
             textBoxStatus.Text = "";
-            textBoxDatum.Text = "";
+            dateTimePickerDier.Value = new DateTime(1753,01,01);
             listBoxBaasje.Items.Clear();
 
 
@@ -94,8 +94,8 @@ namespace Dierenartsenpraktijk.Forms
             textBoxRas.Text = selectedDier.Ras;
             textBoxKleur.Text = selectedDier.Kleur;
             textBoxStatus.Text = selectedDier.Gezondheidsstatus;
-            DateTime date = selectedDier.Geboortedatum;
-            textBoxDatum.Text = date.ToString("dd/MM/yyyy");
+            dateTimePickerDier.Value = selectedDier.Geboortedatum;
+            
             listBoxBaasje.Items.Clear();
             listBoxBaasje.Items.Add(selectedDier.Baasje.Voornaam + " " + selectedDier.Baasje.Achternaam);
             selectedKlant = selectedDier.Baasje;
@@ -155,6 +155,57 @@ namespace Dierenartsenpraktijk.Forms
             selectedDier.Baasje = selectedKlant;
             listBoxBaasje.Items.Clear();
             listBoxBaasje.Items.Add(selectedDier.Baasje.Voornaam + " " + selectedDier.Baasje.Achternaam);
+        }
+
+
+     
+
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (textBoxNaam.Text == null || textBoxNaam.Text == "")
+            {
+                MessageBox.Show("Vul een naam in");
+                return;
+            }
+            if (textBoxSoort.Text == null || textBoxSoort.Text == "")
+            {
+                MessageBox.Show("Vul een achternaam in");
+                return;
+            }
+            if(textBoxKleur.Text == null || textBoxKleur.Text == "")
+            {
+                MessageBox.Show("Vul een kleur in");
+                return;
+            }
+            selectedDier.Naam = textBoxNaam.Text;
+            selectedDier.Soort = textBoxSoort.Text;
+            selectedDier.Ras = textBoxRas.Text;
+            selectedDier.Kleur = textBoxKleur.Text;
+            selectedDier.Gezondheidsstatus = textBoxStatus.Text;
+            selectedDier.Geboortedatum = dateTimePickerDier.Value;
+            dierRepository.Opslaan(selectedDier);
+            MessageBox.Show("Dier: " + selectedDier.ToString() + " werd geupdated");
+
+        }
+
+        private void buttonVerwijder_Click(object sender, EventArgs e)
+        {
+            if (selectedDier == null)
+            {
+                return;
+            }
+            MessageBox.Show(selectedDier.Naam + ", " + selectedDier.Soort + " van " + selectedDier.Baasje.Voornaam + " [id: " + selectedDier.Id + "] werd verwijderd uit de database");
+            dierRepository.Delete(this.selectedDier);
+            //steeds resetten van geselecteerde klant en textboxen terug leegmaken
+            selectedDier = null;
+            selectedKlant = null;
+            textBoxNaam.Text = "";
+            textBoxSoort.Text = "";
+            textBoxRas.Text = "";
+            textBoxKleur.Text = "";
+            textBoxStatus.Text = "";
+            dateTimePickerDier.Value = new DateTime(1753, 01, 01);
+            listBoxBaasje.Items.Clear();
         }
     }
 }

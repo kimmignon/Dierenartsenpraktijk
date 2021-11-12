@@ -41,6 +41,7 @@ namespace Dierenartsenpraktijk.Data
             command.Parameters.AddWithValue("@Naam", dier.Naam);
             command.Parameters.AddWithValue("@Soort", dier.Soort);
             command.Parameters.AddWithValue("@Kleur", dier.Kleur);
+            command.Parameters.AddWithValue("@Ras", dier.Ras);
             command.Parameters.AddWithValue("@Geboortedatum", dier.Geboortedatum);
             command.Parameters.AddWithValue("@Gezondheidsstatus", dier.Gezondheidsstatus);
             command.Parameters.AddWithValue("@BaasjeId", dier.Baasje.Id);
