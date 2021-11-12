@@ -216,6 +216,7 @@ namespace Dierenartsenpraktijk.Forms
             //steeds resetten van geselecteerde klant en textboxen terug leegmaken
 
             selectedKlantForNew = null;
+            listBoxBaasjeNieuw.Items.Clear();
             listBoxKlantenNieuw.Items.Clear();
             listBoxKlantenNieuw.Items.Add("-Id- \t -Naam- \t \t -Telefoon-");
             foreach (Klant klant in list)

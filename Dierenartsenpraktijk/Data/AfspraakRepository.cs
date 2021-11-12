@@ -206,7 +206,7 @@ namespace Dierenartsenpraktijk.Data
 
 
         //Functie om het RedenCosnult vanuit database (string) te mappen op deze van object Afspraak (enum Reden)
-        protected RedenAfspraak mapRedenAfspraak(string DbValue)
+        public RedenAfspraak mapRedenAfspraak(string DbValue)
         {
             RedenAfspraak returnType = new RedenAfspraak();
             switch (DbValue)
