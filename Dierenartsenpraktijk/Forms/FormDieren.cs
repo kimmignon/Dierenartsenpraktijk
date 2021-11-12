@@ -207,5 +207,101 @@ namespace Dierenartsenpraktijk.Forms
             dateTimePickerDier.Value = new DateTime(1753, 01, 01);
             listBoxBaasje.Items.Clear();
         }
+        //nu alle code om nieuwe klant toe te voegen, aparte klantenlijst en selectedklant maken
+        //nieuwe functie om klanten in juiste listbox te zetten
+        List<Klant> klantenLijstVoorNieuw = new List<Klant>();
+        Klant selectedKlantForNew;
+        private void zetKlantenInListboxVoorNieuw(List<Klant> list)
+        {
+            //steeds resetten van geselecteerde klant en textboxen terug leegmaken
+
+            selectedKlantForNew = null;
+            listBoxKlantenNieuw.Items.Clear();
+            listBoxKlantenNieuw.Items.Add("-Id- \t -Naam- \t \t -Telefoon-");
+            foreach (Klant klant in list)
+            {
+                int? id = klant.Id;
+                string voornaam = klant.Voornaam;
+                string achternaam = klant.Achternaam;
+                int telefoon = klant.Telefoonnummer;
+                string inputItem = id + "\t" + voornaam + " " + achternaam + "\t" + telefoon;
+                listBoxKlantenNieuw.Items.Add(inputItem);
+            }
+        }
+        private void buttonAlleNieuw_Click(object sender, EventArgs e)
+        {
+            klantenLijstVoorNieuw = klantenRepository.GeefAlle();
+            zetKlantenInListboxVoorNieuw(klantenLijstVoorNieuw);
+        }
+
+        private void buttonOpNaamNieuw_Click(object sender, EventArgs e)
+        {
+            if (textBoxOpNaamNieuw.Text == "Geef naam in" || textBoxOpNaamNieuw.Text == "")
+            {
+                MessageBox.Show("Geef een naam of een deel van een naam in om dierenartsen te zoeken");
+                return;
+            }
+            klantenLijstVoorNieuw = klantenRepository.GeefOpNaam(textBoxOpNaamNieuw.Text);
+            zetKlantenInListboxVoorNieuw(klantenLijstVoorNieuw);
+        }
+
+        private void buttonSelKlantNieuw_Click(object sender, EventArgs e)
+        {
+            int index = listBoxKlantenNieuw.SelectedIndex - 1;
+            if (index < 0)
+            {
+                return;
+            }
+            this.selectedKlantForNew = klantenLijstVoorNieuw[index];
+            listBoxBaasjeNieuw.Items.Clear();
+            listBoxBaasjeNieuw.Items.Add(selectedKlantForNew.Voornaam + " " + selectedKlantForNew.Achternaam);
+        }
+
+        private void buttonVoegToe_Click(object sender, EventArgs e)
+        {
+            if (textBoxNaamNieuw.Text == null || textBoxNaamNieuw.Text == "")
+            {
+                MessageBox.Show("Vul een naam in");
+                return;
+            }
+            if (textBoxSoortNieuw.Text == null || textBoxSoortNieuw.Text == "")
+            {
+                MessageBox.Show("Vul een soort in");
+                return;
+            }
+            if (textBoxKleurNieuw.Text == null || textBoxKleurNieuw.Text == "")
+            {
+                MessageBox.Show("Vul een kleur in");
+                return;
+            }
+            if(selectedKlantForNew == null)
+            {
+                MessageBox.Show("Kies een baasje");
+                return;
+            }
+            string naam = textBoxNaamNieuw.Text;
+            string soort = textBoxSoortNieuw.Text;
+            string? ras = textBoxRasNieuw.Text;
+            string kleur = textBoxKleurNieuw.Text;
+            string? status = textBoxStatusNieuw.Text;
+            DateTime datum = dateTimePickerNieuw.Value;
+            Klant klant = selectedKlantForNew;
+            Dier nieuwDier = new Dier(naam, soort, kleur, datum, klant);
+            nieuwDier.Ras = ras;
+            nieuwDier.Gezondheidsstatus = status;
+
+            dierRepository.Opslaan(nieuwDier);
+            MessageBox.Show("Dier: " + nieuwDier.ToString() + " werd geupdated");
+            //terug resetten
+            textBoxNaamNieuw.Text = "";
+            textBoxSoortNieuw.Text = "";
+            textBoxRasNieuw.Text = "";
+            textBoxKleurNieuw.Text = "";
+            textBoxStatusNieuw.Text = "";
+            dateTimePickerNieuw.Value = new DateTime(1753, 01, 01);
+            selectedKlantForNew = null;
+            listBoxBaasjeNieuw.Items.Clear();
+            listBoxKlantenNieuw.Items.Clear();
+        }
     }
 }
