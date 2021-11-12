@@ -48,7 +48,15 @@
             this.textBoxNaamIngave = new System.Windows.Forms.TextBox();
             this.buttonToonAlle = new System.Windows.Forms.Button();
             this.tabPageNieuwe = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.textBoxSpecialisatieNieuwe = new System.Windows.Forms.TextBox();
+            this.textBoxTelefoonNieuwe = new System.Windows.Forms.TextBox();
+            this.textBoxAchternaamNieuwe = new System.Windows.Forms.TextBox();
+            this.textBoxVoornaamNieuwe = new System.Windows.Forms.TextBox();
+            this.labelSpecialisatieNieuwe = new System.Windows.Forms.Label();
+            this.labelTelefoonNieuwe = new System.Windows.Forms.Label();
+            this.labelAchternaamNieuwe = new System.Windows.Forms.Label();
+            this.labelVoornaamNieuw = new System.Windows.Forms.Label();
+            this.buttonVoegToe = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPageOverzicht.SuspendLayout();
             this.tabPageNieuwe.SuspendLayout();
@@ -253,23 +261,96 @@
             // 
             // tabPageNieuwe
             // 
-            this.tabPageNieuwe.Controls.Add(this.label1);
+            this.tabPageNieuwe.Controls.Add(this.buttonVoegToe);
+            this.tabPageNieuwe.Controls.Add(this.textBoxSpecialisatieNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.textBoxTelefoonNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.textBoxAchternaamNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.textBoxVoornaamNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.labelSpecialisatieNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.labelTelefoonNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.labelAchternaamNieuwe);
+            this.tabPageNieuwe.Controls.Add(this.labelVoornaamNieuw);
             this.tabPageNieuwe.Location = new System.Drawing.Point(4, 29);
             this.tabPageNieuwe.Name = "tabPageNieuwe";
             this.tabPageNieuwe.Padding = new System.Windows.Forms.Padding(3);
             this.tabPageNieuwe.Size = new System.Drawing.Size(935, 528);
             this.tabPageNieuwe.TabIndex = 1;
-            this.tabPageNieuwe.Text = "Voeg nieuwe toe";
+            this.tabPageNieuwe.Text = "Nieuwe dierenarts";
             this.tabPageNieuwe.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // textBoxSpecialisatieNieuwe
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(32, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
+            this.textBoxSpecialisatieNieuwe.Location = new System.Drawing.Point(601, 167);
+            this.textBoxSpecialisatieNieuwe.Name = "textBoxSpecialisatieNieuwe";
+            this.textBoxSpecialisatieNieuwe.Size = new System.Drawing.Size(195, 27);
+            this.textBoxSpecialisatieNieuwe.TabIndex = 8;
+            // 
+            // textBoxTelefoonNieuwe
+            // 
+            this.textBoxTelefoonNieuwe.Location = new System.Drawing.Point(601, 98);
+            this.textBoxTelefoonNieuwe.Name = "textBoxTelefoonNieuwe";
+            this.textBoxTelefoonNieuwe.Size = new System.Drawing.Size(195, 27);
+            this.textBoxTelefoonNieuwe.TabIndex = 7;
+            // 
+            // textBoxAchternaamNieuwe
+            // 
+            this.textBoxAchternaamNieuwe.Location = new System.Drawing.Point(159, 167);
+            this.textBoxAchternaamNieuwe.Name = "textBoxAchternaamNieuwe";
+            this.textBoxAchternaamNieuwe.Size = new System.Drawing.Size(195, 27);
+            this.textBoxAchternaamNieuwe.TabIndex = 6;
+            // 
+            // textBoxVoornaamNieuwe
+            // 
+            this.textBoxVoornaamNieuwe.Location = new System.Drawing.Point(159, 101);
+            this.textBoxVoornaamNieuwe.Name = "textBoxVoornaamNieuwe";
+            this.textBoxVoornaamNieuwe.Size = new System.Drawing.Size(195, 27);
+            this.textBoxVoornaamNieuwe.TabIndex = 5;
+            // 
+            // labelSpecialisatieNieuwe
+            // 
+            this.labelSpecialisatieNieuwe.AutoSize = true;
+            this.labelSpecialisatieNieuwe.Location = new System.Drawing.Point(444, 170);
+            this.labelSpecialisatieNieuwe.Name = "labelSpecialisatieNieuwe";
+            this.labelSpecialisatieNieuwe.Size = new System.Drawing.Size(102, 20);
+            this.labelSpecialisatieNieuwe.TabIndex = 4;
+            this.labelSpecialisatieNieuwe.Text = "Specialisatie *";
+            // 
+            // labelTelefoonNieuwe
+            // 
+            this.labelTelefoonNieuwe.AutoSize = true;
+            this.labelTelefoonNieuwe.Location = new System.Drawing.Point(444, 101);
+            this.labelTelefoonNieuwe.Name = "labelTelefoonNieuwe";
+            this.labelTelefoonNieuwe.Size = new System.Drawing.Size(132, 20);
+            this.labelTelefoonNieuwe.TabIndex = 3;
+            this.labelTelefoonNieuwe.Text = "Telefoonnummer *";
+            // 
+            // labelAchternaamNieuwe
+            // 
+            this.labelAchternaamNieuwe.AutoSize = true;
+            this.labelAchternaamNieuwe.Location = new System.Drawing.Point(32, 170);
+            this.labelAchternaamNieuwe.Name = "labelAchternaamNieuwe";
+            this.labelAchternaamNieuwe.Size = new System.Drawing.Size(99, 20);
+            this.labelAchternaamNieuwe.TabIndex = 2;
+            this.labelAchternaamNieuwe.Text = "Achternaam *";
+            // 
+            // labelVoornaamNieuw
+            // 
+            this.labelVoornaamNieuw.AutoSize = true;
+            this.labelVoornaamNieuw.Location = new System.Drawing.Point(32, 101);
+            this.labelVoornaamNieuw.Name = "labelVoornaamNieuw";
+            this.labelVoornaamNieuw.Size = new System.Drawing.Size(87, 20);
+            this.labelVoornaamNieuw.TabIndex = 1;
+            this.labelVoornaamNieuw.Text = "Voornaam *";
+            // 
+            // buttonVoegToe
+            // 
+            this.buttonVoegToe.Location = new System.Drawing.Point(570, 271);
+            this.buttonVoegToe.Name = "buttonVoegToe";
+            this.buttonVoegToe.Size = new System.Drawing.Size(226, 37);
+            this.buttonVoegToe.TabIndex = 9;
+            this.buttonVoegToe.Text = "Voeg nieuwe dierenarts toe";
+            this.buttonVoegToe.UseVisualStyleBackColor = true;
+            this.buttonVoegToe.Click += new System.EventHandler(this.buttonVoegToe_Click);
             // 
             // FormDierenartsen
             // 
@@ -312,6 +393,14 @@
         private System.Windows.Forms.Button buttonSelecteer;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonVerwijder;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelAchternaamNieuwe;
+        private System.Windows.Forms.Label labelVoornaamNieuw;
+        private System.Windows.Forms.Label labelTelefoonNieuwe;
+        private System.Windows.Forms.TextBox textBoxSpecialisatieNieuwe;
+        private System.Windows.Forms.TextBox textBoxTelefoonNieuwe;
+        private System.Windows.Forms.TextBox textBoxAchternaamNieuwe;
+        private System.Windows.Forms.TextBox textBoxVoornaamNieuwe;
+        private System.Windows.Forms.Label labelSpecialisatieNieuwe;
+        private System.Windows.Forms.Button buttonVoegToe;
     }
 }

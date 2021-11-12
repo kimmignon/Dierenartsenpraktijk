@@ -9,6 +9,6 @@ namespace Dierenartsenpraktijk.Model
     //Parent klasse Enitiy voor alle modelklassen om met Generics te kunnen werken
     internal abstract class Entity
     {
-        public int? Id {  get; set; }
+        public int? Id {  get; set; } = null;
     }
 }

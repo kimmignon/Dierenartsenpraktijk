@@ -105,8 +105,12 @@ namespace Dierenartsenpraktijk.Forms
 
 
         //methode om ingave van correct telefoonnummer te controleren
-        public bool foutTelefoonnummer(string textIngave)
+        private bool foutTelefoonnummer(string textIngave)
         {
+            if(textIngave.ToCharArray()[0] != '0' || textIngave.ToCharArray()[1] != '4' || textIngave.ToCharArray()[2] != '7')
+            {
+                return true;
+            }
             foreach(char i in textIngave.ToCharArray())
             {
                 if (!char.IsDigit(i))
@@ -123,7 +127,7 @@ namespace Dierenartsenpraktijk.Forms
         }
 
         //methode om ingave specialisatie type te controleren
-        public bool foutSpecialisatietype(string textIngave)
+        private bool foutSpecialisatietype(string textIngave)
         {
             textIngave = textIngave.ToLower();
             if(textIngave == "kattenenhonden" || textIngave == "reptielen" || textIngave == "vogels" || textIngave == "knaagdieren")
@@ -133,10 +137,21 @@ namespace Dierenartsenpraktijk.Forms
             return true;
         }
 
+        //Updaten van gegevens van bestaande dierenartsen
         private void buttonUpdate_Click(object sender, EventArgs e)
         {
+            if (textBoxVoornaamNieuwe.Text == null || textBoxVoornaamNieuwe.Text == "")
+            {
+                MessageBox.Show("Vul een voornaam in");
+                return;
+            }
+            if (textBoxAchternaamNieuwe.Text == null || textBoxAchternaamNieuwe.Text == "")
+            {
+                MessageBox.Show("Vul een achternaam in");
+                return;
+            }
             if (foutTelefoonnummer(textBoxTelefoonnummer.Text)){
-                MessageBox.Show("Telefoonnummer kan enkel uit cijfers bestaan en moet 10 cijfers lang zijn");
+                MessageBox.Show("Telefoonnummer bevat enkel cijfers en is 10 cijfers lang, startende met 047XXXXXXX");
                 return;
             }
             if (foutSpecialisatietype(textBoxSpecialisatie.Text)){
@@ -145,10 +160,47 @@ namespace Dierenartsenpraktijk.Forms
             }
             selectedArts.Voornaam = textBoxVoornaam.Text;
             selectedArts.Achternaam = textBoxAchternaam.Text;
-            selectedArts.Telefoonnummer = 0 + Int32.Parse(textBoxTelefoonnummer.Text);
+            selectedArts.Telefoonnummer = 0 + int.Parse(textBoxTelefoonnummer.Text);
             selectedArts.Specialisatie = dierenartsRepository.mapSpecialisatieType(textBoxSpecialisatie.Text);
             dierenartsRepository.Opslaan(selectedArts);
             MessageBox.Show("Dierenarts: " + selectedArts.ToString() + " werd geupdated");
+        }
+
+
+        //Nieuwe dierenarts aanmaken
+        private void buttonVoegToe_Click(object sender, EventArgs e)
+        {
+            if(textBoxVoornaamNieuwe.Text == null || textBoxVoornaamNieuwe.Text == "")
+            {
+                MessageBox.Show("Vul een voornaam in");
+                return;
+            }
+            if (textBoxAchternaamNieuwe.Text == null || textBoxAchternaamNieuwe.Text == "")
+            {
+                MessageBox.Show("Vul een achternaam in");
+                return;
+            }
+            if (foutTelefoonnummer(textBoxTelefoonNieuwe.Text))
+            {
+                MessageBox.Show("Telefoonnummer bevat enkel cijfers en is 10 cijfers lang, startende met 047XXXXXXX");
+                return;
+            }
+            if (foutSpecialisatietype(textBoxSpecialisatieNieuwe.Text))
+            {
+                MessageBox.Show("Incorrecte specialisatie, kies uit: KattenEnHonden, Reptielen, Vogels of Knaagdieren");
+                return;
+            }
+            string voornaam = textBoxVoornaamNieuwe.Text;
+            string achternaam = textBoxAchternaamNieuwe.Text;
+            int telefoonnummer = 0 + Int32.Parse(textBoxTelefoonNieuwe.Text);
+            SpecialisatieType specialisatie = dierenartsRepository.mapSpecialisatieType(textBoxSpecialisatie.Text);
+            Dierenarts nieuweDierenarts = new Dierenarts(voornaam, achternaam, telefoonnummer, specialisatie);
+            dierenartsRepository.Opslaan(nieuweDierenarts);
+            MessageBox.Show("Dierenarts: " + nieuweDierenarts.ToString() + " werd toegevoegd");
+            textBoxVoornaamNieuwe.Text = "";
+            textBoxAchternaamNieuwe.Text = "";
+            textBoxTelefoonNieuwe.Text = "";
+            textBoxSpecialisatieNieuwe.Text = "";
         }
     }
 }
